@@ -32,6 +32,12 @@ build/
 Thumbs.db
 .DS_Store
 
+# Media files
+*.mp4
+*.webm
+*.mov
+**/assets/**/hero/*.mp4
+
 # Logs
 logs/
 *.log
