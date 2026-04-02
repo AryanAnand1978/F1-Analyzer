@@ -1,0 +1,148 @@
+/* AnalyzerHome.css */
+
+.analyzer-page {
+  background-color: #0a0a0a;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+.main-title {
+  font-size: 4rem;
+  font-weight: 900;
+  margin-bottom: 60px;
+  letter-spacing: -1px;
+}
+
+.white-text { color: #fff; }
+.red-text { color: #e10600; }
+
+.wide-card-container {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* Base Card Logic */
+.f1-card {
+  display: flex;
+  height: 320px;
+  background-color: #141414;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  border-left: 4px solid #e10600; /* Red accent on the left */
+}
+
+/* Symmetrical Flip */
+.f1-card.reverse {
+  flex-direction: row-reverse;
+  border-left: none;
+  border-right: 4px solid #e10600; /* Red accent moves to the right */
+}
+
+.f1-card:hover {
+  transform: scale(1.01);
+  background-color: #1a1a1a;
+}
+
+/* Images */
+.card-image {
+  flex: 1.4;
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(30%);
+  transition: filter 0.3s ease;
+}
+
+.f1-card:hover .card-image {
+  filter: grayscale(0%);
+}
+
+.driver-img { background-image: url('https://images.unsplash.com/photo-1533130061792-64b345e4a833?q=80&w=1000'); }
+.team-img { background-image: url('https://images.unsplash.com/photo-1599583161314-e0b6899166f2?q=80&w=1000'); }
+
+/* Content */
+.card-content {
+  flex: 1;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.reverse .card-content {
+  text-align: right; /* Aligns text to the right for the second card */
+  align-items: flex-end;
+}
+
+.text-section h2 {
+  color: #fff;
+  font-size: 2.2rem;
+  font-weight: 900;
+  margin: 0;
+}
+
+.text-section p {
+  color: #888;
+  font-size: 1.1rem;
+  margin: 10px 0 25px 0;
+}
+
+/* The Long Bold Arrow */
+.long-arrow-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: fit-content;
+}
+
+.long-arrow-line {
+  height: 3px;
+  width: 120px;
+  background-color: #e10600;
+  transition: width 0.4s ease, background-color 0.4s ease;
+}
+
+.arrow-head {
+  color: #e10600;
+  font-size: 1.5rem;
+  font-weight: 900;
+  transition: color 0.4s ease;
+}
+
+/* Hover Animations */
+.f1-card:hover .long-arrow-line {
+  width: 180px;
+  background-color: #fff;
+}
+
+.f1-card:hover .arrow-head {
+  color: #fff;
+}
+
+/* Bounce for Right Arrow */
+.f1-card:not(.reverse):hover .arrow-head {
+  animation: bounceRight 0.8s infinite;
+}
+
+/* Bounce for Left Arrow */
+.f1-card.reverse:hover .arrow-head {
+  animation: bounceLeft 0.8s infinite;
+}
+
+@keyframes bounceRight {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(10px); }
+}
+
+@keyframes bounceLeft {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-10px); }
+}

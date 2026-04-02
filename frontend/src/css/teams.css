@@ -1,0 +1,241 @@
+/* Import the specific Racing fonts used in the UI */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+
+:root {
+  --f1-red: #e10600;
+  --dark-bg: #000000;
+  --card-bg: #15151e;
+  --card-hover: #1f1f27;
+  --text-main: #ffffff;
+  --text-muted: #949498;
+  --border-color: #38383f;
+}
+
+/* Page */
+.teams-page {
+  background-color: var(--dark-bg);
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(225, 6, 0, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(225, 6, 0, 0.05) 0%, transparent 40%);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  padding: 40px 5%;
+}
+
+/* Header Section */
+.teams-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 15px;
+  margin-bottom: 40px;
+}
+
+.teams-header h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin: 0;
+}
+
+.season-select {
+  background: transparent;
+  color: white;
+  border: 1px solid var(--border-color);
+  padding: 5px 15px;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.season-select:hover {
+  border-color: var(--f1-red);
+}
+
+/* Grid Layout */
+.teams-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 100px;
+}
+
+/* ========================= */
+/* 🚀 TEAM CARD (UPDATED) */
+/* ========================= */
+
+.team-card {
+  position: relative;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid #333;
+  padding: 20px;
+  overflow: hidden;
+  cursor: pointer;
+
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Speed Corner Effect */
+.team-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, transparent 50%, rgba(255,255,255,0.03) 50%);
+}
+
+/* Hover Effect (same as drivers) */
+.team-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-left-color: var(--f1-red);
+  background-color: var(--card-hover);
+  box-shadow: 0 10px 25px rgba(225, 6, 0, 0.15);
+}
+
+/* Title highlight on hover */
+.team-card:hover h2 {
+  color: var(--f1-red);
+  transition: 0.3s;
+}
+
+/* Optional subtle badge effect */
+.team-card:hover .nationality {
+  background: rgba(225, 6, 0, 0.15);
+}
+
+/* Selected state */
+.team-card.selected {
+  border-left: 4px solid var(--f1-red);
+  background: linear-gradient(145deg, #15151e, #1e1e2d);
+  box-shadow: 0 10px 30px rgba(225, 6, 0, 0.25);
+}
+
+/* Top Section */
+.team-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.team-card h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.2rem;
+  margin: 0;
+  letter-spacing: 1px;
+  transition: 0.3s;
+}
+
+.nationality {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px 8px;
+  margin-top: 8px;
+  display: inline-block;
+  transition: 0.3s;
+}
+
+/* Checkbox */
+.team-card input[type="checkbox"] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+}
+
+.team-card input[type="checkbox"]:checked {
+  background-color: var(--f1-red);
+  border-color: var(--f1-red);
+}
+
+.team-card input[type="checkbox"]:checked::after {
+  content: '✔';
+  color: white;
+  font-size: 12px;
+  position: absolute;
+  top: 0;
+  left: 3px;
+}
+
+/* Stats Section */
+.team-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.stat-value {
+  font-size: 0.9rem;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-main);
+}
+
+/* Compare Bar */
+.compare-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #111111;
+  padding: 15px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  border-top: 1px solid var(--border-color);
+}
+
+.compare-bar span {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.compare-btn {
+  background-color: var(--f1-red);
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.compare-btn:disabled {
+  background-color: #333;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.compare-btn:hover:not(:disabled) {
+  opacity: 0.8;
+}

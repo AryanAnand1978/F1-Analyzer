@@ -1,0 +1,264 @@
+/* ================= VARIABLES ================= */
+:root {
+  --f1-red: #e10600;
+  --f1-dark-red: #8b0000;
+  --bg-black: #0b0b0e;
+  --card-gradient: linear-gradient(145deg, #1a1a24, #121217);
+  --border-subtle: #2a2a35;
+  --font-inter: 'Inter', sans-serif;
+  --transition-fast: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ================= GLOBAL ANIMATIONS ================= */
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scanline {
+  0% { top: -100%; }
+  100% { top: 100%; }
+}
+
+@keyframes glitchChromatic {
+  0% {
+    text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+                0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+  15% {
+    text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+                0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+                -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+  50% {
+    text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+                0.05em 0 0 rgba(0, 255, 0, 0.75),
+                0 -0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+  100% {
+    text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75),
+                -0.025em -0.025em 0 rgba(0, 255, 0, 0.75),
+                -0.025em -0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+}
+
+/* ================= PAGE SETUP ================= */
+.analyzer-page {
+  background-color: var(--bg-black);
+  /* Speed-line background pattern */
+  background-image: 
+    linear-gradient(0deg, transparent 24%, rgba(225, 6, 0, .03) 25%, rgba(225, 6, 0, .03) 26%, transparent 27%, transparent 74%, rgba(225, 6, 0, .03) 75%, rgba(225, 6, 0, .03) 76%, transparent 77%, transparent),
+    linear-gradient(90deg, transparent 24%, rgba(225, 6, 0, .03) 25%, rgba(225, 6, 0, .03) 26%, transparent 27%, transparent 74%, rgba(225, 6, 0, .03) 75%, rgba(225, 6, 0, .03) 76%, transparent 77%, transparent);
+  background-size: 60px 60px;
+  
+  color: #fff;
+  min-height: 100vh;
+  font-family: var(--font-inter);
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* ================= HEADER ================= */
+.analyzer-header {
+  animation: slideInUp 0.6s ease-out;
+  border-left: 5px solid var(--f1-red);
+  padding-left: 20px;
+}
+
+.analyzer-header h1 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  font-style: italic;
+  margin: 0;
+  text-transform: uppercase;
+  animation: glitchChromatic 3s infinite;
+}
+
+.analyzer-header p {
+  color: var(--f1-red);
+  letter-spacing: 5px;
+  font-weight: bold;
+  margin: 5px 0 0 0;
+}
+
+/* ================= CARDS (CORE) ================= */
+.card {
+  width: 100%;
+  background: var(--card-gradient);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 25px;
+  position: relative;
+  overflow: hidden; /* Necessary for scanline and glow */
+  transition: var(--transition-fast);
+  animation: slideInUp 0.6s backwards;
+}
+
+/* Scanning Radar Effect */
+.card::before {
+  content: '';
+  position: absolute;
+  top: -100%; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(225, 6, 0, 0.05), transparent);
+  animation: scanline 4s linear infinite;
+  pointer-events: none;
+}
+
+/* Tachometer Redline (Bottom) */
+.card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 3px;
+  background: var(--f1-red);
+  transition: width 0.4s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--f1-red);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.6), 0 0 15px rgba(225, 6, 0, 0.1);
+}
+
+.card:hover::after {
+  width: 100%;
+}
+
+/* ================= COMPARISON ================= */
+.comparison-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #000;
+  border: 2px solid #222;
+  padding: 40px;
+}
+
+.driver-box {
+  font-size: 2.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+.vs {
+  font-size: 5rem;
+  font-weight: 900;
+  font-style: italic;
+  opacity: 0.3;
+  background: linear-gradient(#fff, #444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.1));
+}
+
+/* ================= METRICS ================= */
+.metrics-card h2 {
+  margin-bottom: 25px;
+  font-style: italic;
+  text-transform: uppercase;
+}
+
+.metric-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 18px 0;
+  border-bottom: 1px solid #222;
+  align-items: center;
+}
+
+.metric-row span:first-child {
+  color: #aaa;
+  font-weight: 500;
+}
+
+.metric-row span:nth-child(n+2) {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.4rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.metric-row:hover {
+  background: rgba(225,6,0,0.08);
+}
+
+/* ================= RACE DATA TABLE ================= */
+.race-card table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+th {
+  color: #666;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  padding: 10px;
+  text-align: left;
+}
+
+tr {
+  background: #1a1a24;
+  transition: var(--transition-fast);
+}
+
+td {
+  padding: 20px;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
+}
+
+td:first-child {
+  border-left: 1px solid #333;
+  border-radius: 8px 0 0 8px;
+}
+
+td:last-child {
+  border-right: 1px solid #333;
+  border-radius: 0 8px 8px 0;
+  color: var(--f1-red);
+  font-weight: 800;
+}
+
+tr:hover td {
+  border-color: var(--f1-red);
+  background: rgba(225, 6, 0, 0.05);
+}
+
+/* ================= VERDICT (CTA) ================= */
+.verdict-card {
+  background: linear-gradient(90deg, var(--f1-red), var(--f1-dark-red));
+  border: none;
+}
+
+.verdict-card h2 { margin-bottom: 10px; }
+
+.verdict-text {
+  font-size: 1.25rem;
+  line-height: 1.7;
+  font-weight: 500;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .comparison-card {
+    flex-direction: column;
+    gap: 30px;
+    text-align: center;
+  }
+
+  .vs { font-size: 3.5rem; margin: 10px 0; }
+  
+  .metric-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    text-align: center;
+  }
+} 

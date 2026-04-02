@@ -1,0 +1,220 @@
+/* Import a racing-style font */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;700&display=swap');
+
+:root {
+  --f1-red: #e10600;
+  --dark-bg: #0b0b0b;
+  --card-bg: #15151e;
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --text-main: #ffffff;
+  --text-muted: #949498;
+}
+
+.drivers-page {
+  background-color: var(--dark-bg);
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(225, 6, 0, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(225, 6, 0, 0.05) 0%, transparent 40%);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  padding: 60px 5%;
+}
+
+/* Header Styling */
+.drivers-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 50px;
+  border-bottom: 4px solid var(--text-main);
+  padding-bottom: 20px;
+}
+
+.drivers-header h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(24px, 5vw, 42px);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+.season-select {
+  padding: 10px 20px;
+  background: var(--card-bg);
+  color: white;
+  border: 1px solid var(--glass-border);
+  border-radius: 0; /* Sharp edges for racing look */
+  font-family: 'Orbitron', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.season-select:hover {
+  border-color: var(--f1-red);
+}
+
+/* Grid Layout */
+.drivers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+/* Advanced Card Styling */
+.driver-card {
+  position: relative;
+  background: var(--card-bg);
+  padding: 0; /* Remove padding to handle internal layouts */
+  border-radius: 0 0 15px 0; /* Asymmetric corners */
+  border: none;
+  border-left: 4px solid #333;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* The "Speed Line" Decorative Element */
+.driver-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, transparent 50%, rgba(255,255,255,0.03) 50%);
+}
+
+.driver-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-left-color: var(--f1-red);
+}
+
+.driver-card.selected {
+  border-left-color: var(--f1-red);
+  box-shadow: 0 10px 30px rgba(225, 6, 0, 0.2);
+  background: linear-gradient(145deg, #15151e, #1e1e2d);
+}
+
+.driver-card-top {
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.driver-card h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 20px;
+  margin-bottom: 5px;
+  letter-spacing: 1px;
+}
+
+.team {
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+.nationality {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 2px 8px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  font-size: 11px;
+}
+
+/* Checkbox Stylings */
+input[type="checkbox"] {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--text-muted);
+  cursor: pointer;
+  position: relative;
+  transition: 0.3s;
+}
+
+input[type="checkbox"]:checked {
+  background: var(--f1-red);
+  border-color: var(--f1-red);
+}
+
+input[type="checkbox"]:checked::after {
+  content: "✓";
+  position: absolute;
+  color: white;
+  left: 5px;
+  top: -2px;
+  font-weight: bold;
+}
+
+/* Stats Section with Glassmorphism */
+.driver-stats {
+  background: rgba(0, 0, 0, 0.3);
+  margin: 0;
+  padding: 20px 25px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  border-top: 1px solid var(--glass-border);
+}
+
+.driver-stats p {
+  display: flex;
+  flex-direction: column;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* Target the value specifically */
+.driver-stats p::after {
+  content: attr(data-value); /* If you add data-value to your JSX */
+  color: var(--text-main);
+  font-size: 18px;
+  font-weight: 700;
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* Hover effect for position */
+.driver-card:hover .team {
+  color: var(--f1-red);
+  transition: 0.3s;
+}
+
+/* Compare Bar | appears when drivers selected */
+.compare-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: var(--card-bg);
+  padding: 15px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--glass-border);
+  z-index: 1000;
+}
+
+.compare-bar span {
+  color: var(--text-main);
+  font-family: 'Orbitron', sans-serif;
+}
+
+.compare-btn {
+  background: var(--f1-red);
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-family: 'Orbitron', sans-serif;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.compare-btn:disabled {
+  background: #555;
+  cursor: not-allowed;
+}

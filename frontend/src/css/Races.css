@@ -1,0 +1,145 @@
+/* Races.css */
+
+.races-page {
+    padding-top: 120px; /* Space for fixed navbar */
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #050505, #111116);
+}
+
+.races-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.page-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+/* Season Selector Styling */
+.season-selector {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.season-selector label {
+    font-weight: 800;
+    font-size: 0.8rem;
+    color: var(--text-gray);
+    letter-spacing: 2px;
+}
+
+.season-selector select {
+    background: #1a1a1f;
+    color: white;
+    border: 1px solid #333;
+    padding: 8px 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.season-selector select:hover {
+    border-color: var(--f1-red);
+}
+
+/* Race List Table-like Structure */
+.race-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+.race-list-header {
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 2fr 1.5fr 1fr;
+    padding: 15px 25px;
+    color: var(--text-gray);
+    font-weight: 900;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #222;
+}
+
+.race-row {
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 2fr 1.5fr 1fr;
+    align-items: center;
+    padding: 25px;
+    margin: 15px 0;
+    background: var(--card-bg);
+    border-radius: 4px;
+    transition: var(--transition-smooth);
+    border-left: 0px solid var(--f1-red);
+    cursor: pointer;
+}
+
+.race-row:hover {
+    transform: scale(1.02) skewX(-2deg);
+    background: #1a1a20;
+    border-left: 5px solid var(--f1-red);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.round-num {
+    font-weight: 900;
+    color: var(--f1-red);
+    font-size: 1.2rem;
+}
+
+.race-name {
+    font-weight: 800;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+}
+
+.circuit-name {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+}
+
+.race-date {
+    font-family: monospace;
+    font-weight: 600;
+}
+
+/* Status Tags */
+.status-tag {
+    font-size: 0.65rem;
+    padding: 4px 10px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.upcoming {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.finished {
+    background: rgba(225, 6, 0, 0.1);
+    color: var(--f1-red);
+    border: 1px solid var(--f1-red);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .race-list-header { display: none; }
+    .race-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        text-align: center;
+    }
+    .page-title { font-size: 2.5rem; }
+}
