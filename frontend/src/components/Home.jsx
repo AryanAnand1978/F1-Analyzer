@@ -1,4 +1,4 @@
-import OpeningTitles from "../assets/images/hero/Opening_Titles.mp4";
+const OpeningTitles = "/Opening_Titles.mp4";
 import analysisHome from "../assets/images/gallery/analysisHome.png";
 import predictorHome from "../assets/images/gallery/Predictor.jpg";
 import teamsHome from "../assets/images/gallery/teams.jpg";
